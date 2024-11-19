@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SKG Talks  - Speak Freely, Share Anonymously</title>
+  <meta name="description" content="SKG Talks : An anonymous network to chat, share photos, and react without revealing your identity. Speak your mind freely.">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>SKG Talks </h1>
+    <p>Speak Freely. Share Anonymously.</p>
+  </header>
+  <div id="app">
+    <div id="settings">
+      <input id="username" type="text" placeholder="Choose a username">
+      <input id="themeColor" type="color" value="#ffcc00">
+      <button id="applySettings">Apply</button>
+    </div>
+
+    <div id="chat">
+      <div id="messages"></div>
+      <div id="sendSection">
+        <button id="openImageInput"></button>
+        <input id="messageInput" type="text" placeholder="Type a message...">
+        <button id="sendMessage">Send</button>
+        <input id="imageInput" type="file" accept="image/*" style="display: none;">
+      </div>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-storage.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
