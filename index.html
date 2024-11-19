@@ -3,28 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SKG Talks 👄</title>
+    <title>Anonymous Chat</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://www.gstatic.com/firebasejs/9.1.2/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.1.2/firebase-firestore.js"></script>
 </head>
 <body>
-    <header>
-        <h1>Welcome to SKG Talks 👄</h1>
-    </header>
-    <main>
-        <section id="chat">
-            <h2>Anonymous Chat Room</h2>
-            <div id="messages"></div>
-        </section>
-        <section id="message-input">
-            <input type="text" id="message" placeholder="Type your message here..." />
-            <button id="send">Send</button>
-        </section>
-    </main>
-    <footer>
-        <p>© 2023 SKG Talks. All rights reserved.</p>
-    </footer>
+    <div class="chat-container">
+        <div id="messages" class="messages"></div>
+        <input type="text" id="username" placeholder="Username (Anonymous)" required>
+        <input type="text" id="messageInput" placeholder="Type a message" required>
+        <button onclick="sendMessage()">Send</button>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
