@@ -1,40 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SKG Talks  - Speak Freely, Share Anonymously</title>
-  <meta name="description" content="SKG Talks : An anonymous network to chat, share photos, and react without revealing your identity. Speak your mind freely.">
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" href="style.css">
+  <title>SKG Talks</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; }
+    .chat-box { max-width: 400px; margin: auto; border: 1px solid #ccc; padding: 10px; }
+    .message { margin: 10px; padding: 5px; border-radius: 5px; background: #f1f1f1; }
+    .input-box { display: flex; margin-top: 10px; }
+    .input-box input { flex: 1; padding: 5px; }
+    .input-box button { padding: 5px; }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>SKG Talks </h1>
-    <p>Speak Freely. Share Anonymously.</p>
-  </header>
-  <div id="app">
-    <div id="settings">
-      <input id="username" type="text" placeholder="Choose a username">
-      <input id="themeColor" type="color" value="#ffcc00">
-      <button id="applySettings">Apply</button>
-    </div>
-
-    <div id="chat">
-      <div id="messages"></div>
-      <div id="sendSection">
-        <button id="openImageInput"></button>
-        <input id="messageInput" type="text" placeholder="Type a message...">
-        <button id="sendMessage">Send</button>
-        <input id="imageInput" type="file" accept="image/*" style="display: none;">
-      </div>
-    </div>
+  <h1>Welcome to SKG Talks 👄</h1>
+  <div class="chat-box" id="chat-box">
+    <!-- Messages will appear here -->
+  </div>
+  <div class="input-box">
+    <input type="text" id="message-input" placeholder="Type your message...">
+    <button onclick="sendMessage()">Send</button>
   </div>
 
-  <script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-storage.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-  <script src="script.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js"></script>
+  <script>
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyB0uQK8EvD51XOQiguG4GIlc5IFOLWEhHU",
+  authDomain: "skg-talks.firebaseapp.com",
+  projectId: "skg-talks",
+  storageBucket: "skg-talks.firebasestorage.app",
+  messagingSenderId: "709491386308",
+  appId: "1:709491386308:web:d74caca451f3570bc82691",
+  measurementId: "G-0YJ8C93HWL"
+    };
+
+    // Initialize Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    // Function to send messages
+    function sendMessage() {
+      const message = document.getElementById("message-input").value;
+      if (message.trim() !== "") {
+        db.ref("messages").push({ text: message });
+        document.getElementById("message-input").value = ""; // Clear input
+      }
+    }
+
+    // Function to display messages
+    db.ref("messages").on("child_added", function(snapshot) {
+      const message = snapshot.val().text;
+      const messageElement = document.createElement("div");
+      messageElement.classList.add("message");
+      messageElement.innerText = message;
+      document.getElementById("chat-box").appendChild(messageElement);
+    });
+  </script>
 </body>
 </html>
